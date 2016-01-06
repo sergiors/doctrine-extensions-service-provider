@@ -4,6 +4,7 @@ namespace Sergiors\Silex\Provider;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Doctrine\Common\EventManager;
+use Gedmo\Sortable\SortableListener;
 use Gedmo\Timestampable\TimestampableListener;
 use Gedmo\Sluggable\SluggableListener;
 
