@@ -1,5 +1,5 @@
 <?php
-namespace Sergirs\Silex\Provider;
+namespace Sergiors\Silex\Provider;
 
 use Silex\Application;
 use Silex\ServiceProviderInterface;
