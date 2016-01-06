@@ -1,5 +1,5 @@
 {
-  "name": "sergiors/pheanstalk-service-provider",
+  "name": "sergiors/doctrine-extensions-service-provider",
   "description": "Doctrine Extensions for Silex",
   "license": "MIT",
   "require": {
