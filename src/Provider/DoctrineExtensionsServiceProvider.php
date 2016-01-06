@@ -21,29 +21,23 @@ class DoctrineExtensionsServiceProvider implements ServiceProviderInterface
             );
         }
 
-        $app['gedmo.sortable_listener'] = $app->share(function (Application $app) {
-            $listener = new SortableListener();
-            $listener->setAnnotationReader($app['annotation_reader']);
-            return $listener;
-        });
-
-        $app['gedmo.timestampable_listener'] = $app->share(function (Application $app) {
-            $listener = new TimestampableListener();
-            $listener->setAnnotationReader($app['annotation_reader']);
-            return $listener;
-        });
-
-        $app['gedmo.sluggable_listener'] = $app->share(function (Application $app) {
-            $listener = new SluggableListener();
-            $listener->setAnnotationReader($app['annotation_reader']);
-            return $listener;
+        $app['gedmo.listeners'] = $app->share(function () {
+            return [
+                new SortableListener(),
+                new TimestampableListener(),
+                new SluggableListener()
+            ];
         });
 
         $app['db.event_manager'] = $app->share(
             $app->extend('db.event_manager', function (EventManager $event) use ($app) {
-                $event->addEventSubscriber($app['gedmo.sortable_listener']);
-                $event->addEventSubscriber($app['gedmo.timestampable_listener']);
-                $event->addEventSubscriber($app['gedmo.sluggable_listener']);
+                $listeners = $app['gedmo.listeners'];
+
+                foreach ($listeners as $listener) {
+                    $listener->setAnnotationReader($app['annotation_reader']);
+                    $event->addEventSubscriber($listener);
+                }
+
                 return $event;
             })
         );
