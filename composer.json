@@ -1,23 +1,23 @@
 {
-  "name": "sergiors/doctrine-extensions-service-provider",
-  "description": "Doctrine Extensions for Silex",
-  "license": "MIT",
-  "require": {
-    "php": ">=5.5",
-    "silex/silex": "^1.3",
-    "sergiors/doctrine-orm-service-provider": "dev-master",
-    "sergiors/annotations-service-provider": "dev-master",
-    "gedmo/doctrine-extensions": "^2.4"
-  },
-  "authors": [
-    {
-      "name": "Sérgio Rafael Siqueira",
-      "email": "sergio@inbep.com.br"
+    "name": "sergiors/doctrine-extensions-service-provider",
+    "description": "Doctrine Extensions for Silex",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sérgio Rafael Siqueira",
+            "email": "sergio@inbep.com.br"
+        }
+    ],
+    "require": {
+        "php": ">=5.5",
+        "silex/silex": "^1.3",
+        "sergiors/doctrine-orm-service-provider": "dev-master",
+        "sergiors/annotations-service-provider": "dev-master",
+        "gedmo/doctrine-extensions": "^2.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sergiors\\Silex\\": "src"
+        }
     }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Sergiors\\Silex\\": "src"
-    }
-  }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace Sergiors\Silex\Provider;
 
 use Silex\Application;
@@ -25,7 +26,7 @@ class DoctrineExtensionsServiceProvider implements ServiceProviderInterface
             return [
                 new SortableListener(),
                 new TimestampableListener(),
-                new SluggableListener()
+                new SluggableListener(),
             ];
         });
 
