@@ -23,7 +23,7 @@
             "Sergiors\\Silex\\": "src"
         }
     },
-    "autoload": {
+    "autoload-dev": {
         "psr-4": {
             "Sergiors\\Silex\\Tests\\": "tests"
         }
