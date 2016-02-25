@@ -16,7 +16,7 @@ class DoctrineExtensionsServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
-        if (!isset($app['annotation_reader'])) {
+        if (!isset($app['annotations'])) {
             throw new \LogicException(
                 'You must register the AnnotationsServiceProvider to use the DoctrineExtensionsServiceProvider.'
             );
@@ -35,7 +35,7 @@ class DoctrineExtensionsServiceProvider implements ServiceProviderInterface
                 $listeners = $app['gedmo.listeners'];
 
                 foreach ($listeners as $listener) {
-                    $listener->setAnnotationReader($app['annotation_reader']);
+                    $listener->setAnnotationReader($app['annotations']);
                     $event->addEventSubscriber($listener);
                 }
 
