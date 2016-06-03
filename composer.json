@@ -11,8 +11,8 @@
     "require": {
         "php": ">=5.5",
         "silex/silex": "^1.3",
-        "sergiors/doctrine-orm-service-provider": "dev-master",
-        "sergiors/annotations-service-provider": "dev-master",
+        "sergiors/doctrine-orm-service-provider": "1.x-dev",
+        "sergiors/annotations-service-provider": "1.x-dev",
         "gedmo/doctrine-extensions": "^2.4"
     },
     "require-dev": {
