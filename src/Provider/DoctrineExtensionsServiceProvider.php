@@ -2,8 +2,8 @@
 
 namespace Sergiors\Silex\Provider;
 
-use Silex\Application;
-use Silex\ServiceProviderInterface;
+use Pimple\Container;
+use Pimple\ServiceProviderInterface;
 use Doctrine\Common\EventManager;
 use Gedmo\Sortable\SortableListener;
 use Gedmo\Timestampable\TimestampableListener;
@@ -14,7 +14,7 @@ use Gedmo\Sluggable\SluggableListener;
  */
 class DoctrineExtensionsServiceProvider implements ServiceProviderInterface
 {
-    public function register(Application $app)
+    public function register(Container $app)
     {
         if (!isset($app['annotations'])) {
             throw new \LogicException(
@@ -22,29 +22,23 @@ class DoctrineExtensionsServiceProvider implements ServiceProviderInterface
             );
         }
 
-        $app['gedmo.listeners'] = $app->share(function () {
+        $app['gedmo.listeners'] = function () {
             return [
                 new SortableListener(),
                 new TimestampableListener(),
                 new SluggableListener(),
             ];
+        };
+
+        $app['db.event_manager'] = $app->extend('db.event_manager', function (EventManager $event) use ($app) {
+            $listeners = $app['gedmo.listeners'];
+
+            foreach ($listeners as $listener) {
+                $listener->setAnnotationReader($app['annotations']);
+                $event->addEventSubscriber($listener);
+            }
+
+            return $event;
         });
-
-        $app['db.event_manager'] = $app->share(
-            $app->extend('db.event_manager', function (EventManager $event) use ($app) {
-                $listeners = $app['gedmo.listeners'];
-
-                foreach ($listeners as $listener) {
-                    $listener->setAnnotationReader($app['annotations']);
-                    $event->addEventSubscriber($listener);
-                }
-
-                return $event;
-            })
-        );
-    }
-
-    public function boot(Application $app)
-    {
     }
 }
